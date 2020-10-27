@@ -9,7 +9,6 @@ class ConfirmDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return AlertDialog(
       content: Text(_confirmContent),
       actions: <Widget>[
