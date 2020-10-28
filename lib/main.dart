@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:readme/common/constant.dart';
 import 'package:readme/view/home.dart';
 
+import 'common/theme.dart';
+
 void main() {
   runApp(App());
 }
@@ -24,14 +26,12 @@ class App extends StatelessWidget {
     // 设置SystemUi样式
     SystemChrome.setSystemUIOverlayStyle(systemUiStyle);
     return MaterialApp(
-      title: ApplicationConstant.title,
-      theme: ThemeData(
-        primarySwatch: Colors.cyan,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        platform: TargetPlatform.iOS
-      ),
-      home: Home(title: ApplicationConstant.title),
-      debugShowCheckedModeBanner: false
-    );
+        title: ApplicationConstant.title,
+        theme: ThemeData(
+            primarySwatch: Colors.blue,
+            textTheme: AppTheme.textTheme,
+            visualDensity: VisualDensity.adaptivePlatformDensity),
+        home: Home(title: ApplicationConstant.title),
+        debugShowCheckedModeBanner: false);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:readme/common/theme.dart';
 
 class Home extends StatefulWidget {
   Home({Key key, this.title}) : super(key: key);
@@ -20,8 +21,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppTheme.nearlyWhite,
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title)
       ),
       body: Center(
         child: Column(

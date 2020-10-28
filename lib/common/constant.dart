@@ -1,4 +1,4 @@
 class ApplicationConstant {
-  static final String title = "阅读Me";
+  static const String title = "阅读Me";
 
 }
