@@ -17,8 +17,9 @@ class App extends StatelessWidget {
     var systemUiStyle = SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
-      statusBarBrightness: Platform.isAndroid ? Brightness.dark : Brightness.light,
-      systemNavigationBarColor: Colors.white,
+      statusBarBrightness:
+          Platform.isAndroid ? Brightness.dark : Brightness.light,
+      systemNavigationBarColor: Colors.grey.shade100,
       systemNavigationBarDividerColor: Colors.grey,
       systemNavigationBarIconBrightness: Brightness.dark,
     );
@@ -31,7 +32,7 @@ class App extends StatelessWidget {
             primarySwatch: Colors.blue,
             textTheme: AppTheme.textTheme,
             visualDensity: VisualDensity.adaptivePlatformDensity),
-        home: Home(title: ApplicationConstant.title),
+        home: Home(),
         debugShowCheckedModeBanner: false);
   }
 }
