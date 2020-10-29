@@ -13,6 +13,9 @@ class _MeState extends State<Me> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppTheme.nearlyWhite,
-        appBar: AppBar(title: Text('我的')));
+        appBar: AppBar(title: Text("我的")),
+        body: Center(
+          child: Text('Hello World'),
+        ));
   }
 }

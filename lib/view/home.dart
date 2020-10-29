@@ -12,21 +12,26 @@ class _HomeState extends State<Home> {
   static const List<BottomNavigationBarItem> bottomItems = [
     BottomNavigationBarItem(
       icon: Icon(Icons.book),
-      label: '书架',
+      label: "书架",
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.language),
-      label: '发现',
+      label: "发现",
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.person),
-      label: '我的',
+      label: "我的",
     ),
   ];
 
   var _selectedIndex = 0;
   var _pageController = PageController();
   var _pages = [BookShelf(), FindBook(), Me()];
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   void _onPageChanged(int index) {
     setState(() {

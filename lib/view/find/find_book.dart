@@ -13,6 +13,6 @@ class _FindBookState extends State<FindBook> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppTheme.nearlyWhite,
-        appBar: AppBar(title: Text('发现')));
+        appBar: AppBar(title: Text("发现")));
   }
 }
