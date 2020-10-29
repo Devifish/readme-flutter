@@ -12,6 +12,7 @@ dependencies:
 
   cupertino_icons: ^1.0.0
   dio: ^3.0.10
+  flustars: ^0.3.3
   pull_to_refresh: ^1.6.2
 
 dev_dependencies:
