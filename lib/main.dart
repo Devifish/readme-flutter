@@ -19,7 +19,7 @@ class App extends StatelessWidget {
       statusBarIconBrightness: Brightness.dark,
       statusBarBrightness:
           Platform.isAndroid ? Brightness.dark : Brightness.light,
-      systemNavigationBarColor: Colors.grey.shade100,
+      systemNavigationBarColor: Colors.grey[100],
       systemNavigationBarDividerColor: Colors.grey,
       systemNavigationBarIconBrightness: Brightness.dark,
     );

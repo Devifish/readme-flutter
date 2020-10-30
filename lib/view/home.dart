@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
             controller: _pageController,
             onPageChanged: _onPageChanged),
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.grey.shade100,
+          backgroundColor: Colors.grey[100],
           items: bottomItems,
           type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex,

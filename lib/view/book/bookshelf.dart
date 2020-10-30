@@ -92,16 +92,21 @@ class _BookListItem extends StatelessWidget {
                 ),
               ),
               Container(
+                padding: const EdgeInsets.only(left: 8, top: 8.0),
+                child: Text(
+                  "作者",
+                  style: TextStyle(fontSize: 12),
+                ),
+              ),
+              Container(
                 padding: const EdgeInsets.only(left: 8, top: 12.0),
                 child: Text(
                   "章节数据",
                   style: TextStyle(fontSize: 12),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
                 ),
               ),
               Container(
-                padding: const EdgeInsets.only(left: 8, top: 22.0),
+                padding: const EdgeInsets.only(left: 8, top: 8.0),
                 child: Text("阅读数据",
                     style: TextStyle(color: Colors.grey, fontSize: 11)),
               ),
