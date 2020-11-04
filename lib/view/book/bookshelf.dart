@@ -5,6 +5,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:readme/common/event.dart';
 import 'package:readme/common/theme.dart';
 import 'package:readme/view/book/book_detail.dart';
+import 'package:readme/view/book/read_book.dart';
 
 class BookShelf extends StatefulWidget {
   @override
@@ -25,6 +26,12 @@ class _BookShelfState extends State<BookShelf> {
     eventBus.on<BookshelfUpdateEvent>().listen((event) {
       log("监听到书架发生变化, 开始更新书架数据");
     });
+  }
+
+  void _toReadBook() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return ReadBook();
+    }));
   }
 
   void _toBookDetail(int bookshelfId) {
@@ -52,9 +59,11 @@ class _BookShelfState extends State<BookShelf> {
                 behavior: HitTestBehavior.opaque,
                 child: _BookListItem(key: Key(index.toString())),
                 onTap: () {
+                  _toReadBook();
+                },
+                onLongPress: () {
                   _toBookDetail(index);
                 },
-                onLongPressUp: () {},
               );
             },
             itemCount: 50),

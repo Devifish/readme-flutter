@@ -18,16 +18,16 @@ class _BookDetailState extends State<BookDetail> {
     _bottomItems = [
       BottomNavigationBarItem(
         icon: Icon(
-          Icons.chrome_reader_mode_outlined,
+          Icons.clear,
         ),
-        label: '立即阅读',
+        label: '移出书架',
       ),
       BottomNavigationBarItem(
         icon: Icon(
-          Icons.clear,
+          Icons.chrome_reader_mode_outlined,
         ),
-        label: '移除书架',
-      ),
+        label: '开始阅读',
+      )
     ];
   }
 
@@ -42,8 +42,10 @@ class _BookDetailState extends State<BookDetail> {
     return Scaffold(
       appBar: AppBar(title: Text("书籍详情")),
       bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
           items: _bottomItems,
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.grey[100],
+          currentIndex: 1,
           onTap: (index) {
             switch (index) {
               case 0: {
