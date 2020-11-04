@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:readme/common/event.dart';
 import 'package:readme/common/theme.dart';
+import 'package:readme/view/book/book_detail.dart';
 
 class BookShelf extends StatefulWidget {
   @override
@@ -26,6 +27,12 @@ class _BookShelfState extends State<BookShelf> {
     });
   }
 
+  void _toBookDetail(int bookshelfId) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return BookDetail();
+    }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +52,9 @@ class _BookShelfState extends State<BookShelf> {
                 behavior: HitTestBehavior.opaque,
                 child: _BookListItem(key: Key(index.toString())),
                 onTap: () {
+                  _toBookDetail(index);
                 },
+                onLongPressUp: () {},
               );
             },
             itemCount: 50),
