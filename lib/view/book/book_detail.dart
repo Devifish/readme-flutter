@@ -49,10 +49,10 @@ class _BookDetailState extends State<BookDetail> {
           onTap: (index) {
             switch (index) {
               case 0: {
-                _toReadBook();
                 break;
               }
               case 1: {
+                _toReadBook();
                 break;
               }
             }
