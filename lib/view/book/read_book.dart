@@ -1,5 +1,6 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
+import 'package:readme/common/constant.dart';
 
 class ReadBook extends StatefulWidget {
   @override
@@ -39,52 +40,63 @@ class _ReadBookState extends State<ReadBook> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = ScreenUtil.getScreenH(context);
+    final statusBarHeight = ScreenUtil.getStatusBarH(context);
+    final contentHeight = screenHeight - statusBarHeight;
+
     return Stack(
       children: [
-        Container(
-          width: ScreenUtil.getScreenW(context),
-          height: ScreenUtil.getScreenH(context),
-          color: Colors.grey,
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: _changeShowTopWidget,
-            child: _flipReadWidget(),
-          ),
-        ),
-        Offstage(offstage: !_showReadTopMenu, child: _readTopMenu())
+        Material(
+            color: Colors.grey,
+            child: Container(
+                padding: EdgeInsets.only(top: statusBarHeight),
+                child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: _changeShowTopWidget,
+                    child: _flipReadWidget(contentHeight)))),
+        Offstage(
+            offstage: !_showReadTopMenu,
+            child: Scaffold(
+                backgroundColor: Colors.transparent,
+                appBar: AppBar(title: Text("阅读页面"), actions: [
+                  PopupMenuButton(
+                    itemBuilder: (context) => [],
+                  )
+                ]),
+                body: GestureDetector(onTap: _changeShowTopWidget),
+                bottomNavigationBar: BottomNavigationBar(
+                  unselectedItemColor: Colors.black,
+                  selectedItemColor: Colors.black,
+                  items: _bottomItems,
+                  type: BottomNavigationBarType.fixed,
+                )))
       ],
     );
   }
 
-  /// 阅读页面顶层菜单
-  ///
-  Widget _readTopMenu() {
-    return Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(title: Text("阅读页面"), actions: [
-          PopupMenuButton(
-            itemBuilder: (context) => [],
-          )
-        ]),
-        body: GestureDetector(onTap: _changeShowTopWidget),
-        bottomNavigationBar: BottomNavigationBar(
-          unselectedItemColor: Colors.black,
-          selectedItemColor: Colors.black,
-          items: _bottomItems,
-          type: BottomNavigationBarType.fixed,
-        ));
-  }
-
-  Widget _flipReadWidget() {
+  /// 滑动翻页阅读控件
+  /// 用于左右滑动翻页方式进行阅读
+  Widget _flipReadWidget(double height) {
     int fontSize = 16;
-    double screenHeight = ScreenUtil.getScreenH(context);
+    double contentHeight = height - ReadPageConstant.INFO_CONTAINER_HEIGHT;
 
     return PageView.builder(
         physics: AlwaysScrollableScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
-          return Text(
-            _content,
-            style: TextStyle(fontSize: fontSize.toDouble()),
+          return Column(
+            children: [
+              Container(
+                height: contentHeight,
+                padding: EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 8),
+                child: Text(_content, style: TextStyle(fontSize: 18)),
+              ),
+              Container(
+                height: ReadPageConstant.INFO_CONTAINER_HEIGHT,
+                child: Text("1/5",
+                    style: TextStyle(
+                        fontSize: ReadPageConstant.INFO_CONTAINER_FONT_SIZE)),
+              )
+            ],
           );
         },
         itemCount: 5);
