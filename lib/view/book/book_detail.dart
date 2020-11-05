@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:readme/view/book/read_book.dart';
+import 'package:readme/view/read/read_book.dart';
 
 class BookDetail extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return new _BookDetailState();
-  }
+  State<StatefulWidget> createState() => _BookDetailState();
 }
 
 class _BookDetailState extends State<BookDetail> {

@@ -5,13 +5,11 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:readme/common/event.dart';
 import 'package:readme/common/theme.dart';
 import 'package:readme/view/book/book_detail.dart';
-import 'package:readme/view/book/read_book.dart';
+import 'package:readme/view/read/read_book.dart';
 
 class BookShelf extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return new _BookShelfState();
-  }
+  State<StatefulWidget> createState() => _BookShelfState();
 }
 
 class _BookShelfState extends State<BookShelf> {
