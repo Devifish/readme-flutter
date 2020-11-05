@@ -6,29 +6,30 @@ import 'package:readme/common/constant.dart';
 class FlipReadView extends StatefulWidget {
   final double height;
   final String content;
-  final PageController controller;
 
-  FlipReadView({this.height, this.content})
-      : controller = PageController(initialPage: 4);
+  FlipReadView({this.height, this.content});
 
   @override
   _FlipReadViewState createState() => _FlipReadViewState();
 }
 
 class _FlipReadViewState extends State<FlipReadView> {
+  static const int INITIAL_PAGE = (1 << 32) ~/ 2;
+  final PageController _controller = PageController(initialPage: INITIAL_PAGE);
+
   int _pageCount = 5;
-  bool reverse = false;
 
   @override
   Widget build(BuildContext context) {
-    final contentHeight =
-        widget.height - ReadPageConstant.INFO_CONTAINER_HEIGHT;
+    final contentHeight = widget.height - ReadPageConstant.INFO_CONTAINER_HEIGHT;
     double contentFontSize = 18;
 
     return PageView.builder(
-      physics: AlwaysScrollableScrollPhysics(),
-      controller: widget.controller,
+      physics: NeverScrollableScrollPhysics(),
+      controller: _controller,
       itemBuilder: (BuildContext context, int index) {
+        final offset = index - INITIAL_PAGE;
+
         return Column(
           children: [
             Container(
@@ -40,7 +41,7 @@ class _FlipReadViewState extends State<FlipReadView> {
             Container(
               height: ReadPageConstant.INFO_CONTAINER_HEIGHT,
               child: Text(
-                "${index + 1}/5",
+                "${offset + 1}/5",
                 style: TextStyle(
                     fontSize: ReadPageConstant.INFO_CONTAINER_FONT_SIZE),
               ),
@@ -48,7 +49,6 @@ class _FlipReadViewState extends State<FlipReadView> {
           ],
         );
       },
-      reverse: reverse,
       onPageChanged: _onPageChanged,
     );
   }

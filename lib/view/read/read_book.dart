@@ -39,6 +39,7 @@ class _ReadBookState extends State<ReadBook> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = ScreenUtil.getScreenW(context);
     final screenHeight = ScreenUtil.getScreenH(context);
     final statusBarHeight = ScreenUtil.getStatusBarH(context);
     final contentHeight = screenHeight - statusBarHeight;
@@ -51,7 +52,26 @@ class _ReadBookState extends State<ReadBook> {
             padding: EdgeInsets.only(top: statusBarHeight),
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
-              onTap: _changeShowTopWidget,
+              onTapUp: (details) {
+                final position = details.globalPosition;
+                final widthRatio = screenWidth / 3;
+
+                // 获取用户点击位置
+                if (position.dx < widthRatio) {
+                  print("上一页");
+                } else if (position.dx > widthRatio * 2) {
+                  print("下一页");
+                }else {
+                  _changeShowTopWidget();
+                }
+              },
+              onHorizontalDragEnd: (details) {
+                if (details.velocity.pixelsPerSecond.dx > 0) {
+                  print("上一页");
+                } else {
+                  print("下一页");
+                }
+              },
               child: FlipReadView(height: contentHeight, content: _content),
             ),
           ),

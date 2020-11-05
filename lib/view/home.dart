@@ -43,10 +43,11 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: PageView.builder(
-            itemBuilder: (context, index) => _pages[index],
-            itemCount: _pages.length,
-            controller: _pageController,
-            onPageChanged: _onPageChanged),
+          itemBuilder: (context, index) => _pages[index],
+          itemCount: _pages.length,
+          controller: _pageController,
+          onPageChanged: _onPageChanged,
+        ),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.grey[100],
           items: bottomItems,
