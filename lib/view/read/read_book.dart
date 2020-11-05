@@ -61,18 +61,27 @@ class _ReadBookState extends State<ReadBook> {
                   print("上一页");
                 } else if (position.dx > widthRatio * 2) {
                   print("下一页");
-                }else {
+                } else {
                   _changeShowTopWidget();
                 }
               },
               onHorizontalDragEnd: (details) {
                 if (details.velocity.pixelsPerSecond.dx > 0) {
-                  print("上一页");
+                  print("上一章");
                 } else {
-                  print("下一页");
+                  print("下一章");
                 }
               },
-              child: FlipReadView(height: contentHeight, content: _content),
+              child: FlipReadView(
+                height: contentHeight,
+                content: _content,
+                onLoadNext: () async {
+                  print("开始加载下一章");
+                },
+                onLoadLase: () async {
+                  print("开始加载上一章");
+                },
+              ),
             ),
           ),
         ),
