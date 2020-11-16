@@ -6,6 +6,7 @@ import 'package:readme/common/event.dart';
 import 'package:readme/common/theme.dart';
 import 'package:readme/view/book/book_detail.dart';
 import 'package:readme/view/read/read_book.dart';
+import 'package:readme/widget/slide_button.dart';
 
 class BookShelf extends StatefulWidget {
   @override
@@ -38,6 +39,23 @@ class _BookShelfState extends State<BookShelf> {
     }));
   }
 
+  InkWell _buildAction(String text, Color color, GestureTapCallback tap) {
+    return InkWell(
+      onTap: tap,
+      child: Container(
+        alignment: Alignment.center,
+        width: 80,
+        color: color,
+        child: Text(
+          text,
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +73,11 @@ class _BookShelfState extends State<BookShelf> {
             itemBuilder: (context, index) {
               return GestureDetector(
                 behavior: HitTestBehavior.opaque,
-                child: _BookListItem(key: Key(index.toString())),
+                child: SlideButton(
+                  singleButtonWidth: 80,
+                  child: _BookListItem(key: Key(index.toString())),
+                  buttons: [_buildAction("删除", Colors.red, () {})],
+                ),
                 onTap: () {
                   _toReadBook();
                 },
@@ -127,8 +149,10 @@ class _BookListItem extends StatelessWidget {
               ),
               Container(
                 padding: const EdgeInsets.only(left: 8, top: 8.0),
-                child: Text("阅读数据",
-                    style: TextStyle(color: Colors.grey, fontSize: 11)),
+                child: Text(
+                  "阅读数据",
+                  style: TextStyle(color: Colors.grey, fontSize: 11),
+                ),
               ),
             ],
           ),

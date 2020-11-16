@@ -43,6 +43,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: PageView.builder(
+          physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) => _pages[index],
           itemCount: _pages.length,
           controller: _pageController,
