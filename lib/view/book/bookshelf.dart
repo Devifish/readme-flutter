@@ -44,6 +44,7 @@ class _BookShelfState extends State<BookShelf> {
       onTap: tap,
       child: Container(
         alignment: Alignment.center,
+        margin: const EdgeInsets.only(top: 8),
         width: 80,
         color: color,
         child: Text(
@@ -61,7 +62,7 @@ class _BookShelfState extends State<BookShelf> {
     return Scaffold(
       backgroundColor: AppTheme.nearlyWhite,
       appBar: AppBar(
-        title: Text("书架"),
+        title: Text("我的书架"),
         actions: [
           PopupMenuButton(
             itemBuilder: (context) => [],
