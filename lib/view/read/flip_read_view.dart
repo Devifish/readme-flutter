@@ -6,13 +6,13 @@ import 'package:readme/common/constant.dart';
 class FlipReadView extends StatefulWidget {
   final double height;
   final String content;
-  final VoidCallback onLoadNext;
-  final VoidCallback onLoadLase;
-  final ReadController controller;
+  final VoidCallback? onLoadNext;
+  final VoidCallback? onLoadLase;
+  final ReadController? controller;
 
   FlipReadView(
-      {this.height,
-      this.content,
+      {this.height = 0,
+      this.content = "",
       this.controller,
       this.onLoadNext,
       this.onLoadLase});
@@ -38,7 +38,7 @@ class _FlipReadViewState extends State<FlipReadView> {
         if (notification.depth == 0 && notification is ScrollEndNotification) {
           var metrics = notification.metrics as PageMetrics;
           var currentIndex = metrics.page;
-          _lastIndex = currentIndex.toInt();
+          _lastIndex = currentIndex!.toInt();
 
           // 防止重复调用
           if (_lastIndex != currentIndex) return false;
@@ -47,7 +47,7 @@ class _FlipReadViewState extends State<FlipReadView> {
             print(currentIndex);
 
             _controller.jumpToPage(0);
-          }else if (currentIndex == 0) {
+          } else if (currentIndex == 0) {
             _controller.jumpToPage(_pageCount - 1);
           }
         }
@@ -82,7 +82,6 @@ class _FlipReadViewState extends State<FlipReadView> {
       ),
     );
   }
-
 }
 
 class ReadController extends ChangeNotifier {

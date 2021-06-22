@@ -2,14 +2,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class SlideButton extends StatefulWidget {
-  Widget child;
-  List<Widget> buttons;
-  GlobalKey<_SlideButtonState> key;
-  double singleButtonWidth;
+  final Widget? child;
+  final List<Widget>? buttons;
+  GlobalKey<_SlideButtonState>? key;
+  double? singleButtonWidth;
 
-  VoidCallback onSlideStarted;
-  VoidCallback onSlideCompleted;
-  VoidCallback onSlideCanceled;
+  VoidCallback? onSlideStarted;
+  VoidCallback? onSlideCompleted;
+  VoidCallback? onSlideCanceled;
 
   SlideButton(
       {this.key,
@@ -30,16 +30,16 @@ class SlideButton extends StatefulWidget {
 class _SlideButtonState extends State<SlideButton>
     with TickerProviderStateMixin {
   double translateX = 0;
-  double maxDragDistance;
+  late double maxDragDistance;
   final Map<Type, GestureRecognizerFactory> gestures =
       <Type, GestureRecognizerFactory>{};
 
-  AnimationController animationController;
+  late AnimationController animationController;
 
   @override
   void initState() {
     super.initState();
-    maxDragDistance = widget.singleButtonWidth * widget.buttons.length;
+    maxDragDistance = widget.singleButtonWidth! * widget.buttons!.length;
     gestures[HorizontalDragGestureRecognizer] =
         GestureRecognizerFactoryWithHandlers<HorizontalDragGestureRecognizer>(
       () => HorizontalDragGestureRecognizer(debugOwner: this),
@@ -69,7 +69,7 @@ class _SlideButtonState extends State<SlideButton>
             Positioned.fill(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: widget.buttons,
+                children: widget.buttons!,
               ),
             ),
             RawGestureDetector(
@@ -80,7 +80,7 @@ class _SlideButtonState extends State<SlideButton>
                   children: <Widget>[
                     Expanded(
                       flex: 1,
-                      child: widget.child,
+                      child: widget.child!,
                     )
                   ],
                 ),
@@ -98,7 +98,7 @@ class _SlideButtonState extends State<SlideButton>
   }
 
   void onHorizontalDragDown(DragDownDetails details) {
-    if (widget.onSlideStarted != null) widget.onSlideStarted.call();
+    if (widget.onSlideStarted != null) widget.onSlideStarted!.call();
   }
 
   void onHorizontalDragUpdate(DragUpdateDetails details) {
@@ -124,14 +124,14 @@ class _SlideButtonState extends State<SlideButton>
   void open() {
     if (translateX != -maxDragDistance)
       animationController.animateTo(-maxDragDistance).then((_) {
-        if (widget.onSlideCompleted != null) widget.onSlideCompleted.call();
+        if (widget.onSlideCompleted != null) widget.onSlideCompleted!.call();
       });
   }
 
   void close() {
     if (translateX != 0)
       animationController.animateTo(0).then((_) {
-        if (widget.onSlideCanceled != null) widget.onSlideCanceled.call();
+        if (widget.onSlideCanceled != null) widget.onSlideCanceled!.call();
       });
   }
 

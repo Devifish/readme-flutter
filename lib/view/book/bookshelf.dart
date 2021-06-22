@@ -14,7 +14,7 @@ class BookShelf extends StatefulWidget {
 }
 
 class _BookShelfState extends State<BookShelf> {
-  RefreshController _refreshController;
+  late RefreshController _refreshController;
 
   @override
   void initState() {
@@ -98,7 +98,7 @@ class _BookShelfState extends State<BookShelf> {
 /// 书籍列表Item
 /// 用于批量构建书籍列表 Item 组件
 class _BookListItem extends StatelessWidget {
-  final Key key;
+  final Key? key;
 
   _BookListItem({@required this.key});
 

@@ -10,8 +10,8 @@ class ReadBook extends StatefulWidget {
 
 class _ReadBookState extends State<ReadBook> {
   bool _showReadTopMenu = false;
-  List<BottomNavigationBarItem> _bottomItems;
-  String _content;
+  late List<BottomNavigationBarItem> _bottomItems;
+  late String _content;
 
   @override
   void initState() {

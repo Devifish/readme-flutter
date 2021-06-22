@@ -7,7 +7,7 @@ class BookDetail extends StatefulWidget {
 }
 
 class _BookDetailState extends State<BookDetail> {
-  List<BottomNavigationBarItem> _bottomItems;
+  late List<BottomNavigationBarItem> _bottomItems;
 
   @override
   void initState() {
@@ -46,13 +46,15 @@ class _BookDetailState extends State<BookDetail> {
           currentIndex: 1,
           onTap: (index) {
             switch (index) {
-              case 0: {
-                break;
-              }
-              case 1: {
-                _toReadBook();
-                break;
-              }
+              case 0:
+                {
+                  break;
+                }
+              case 1:
+                {
+                  _toReadBook();
+                  break;
+                }
             }
           }),
     );
