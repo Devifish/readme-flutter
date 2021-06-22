@@ -56,6 +56,9 @@ class TextComposition {
   /// 背景 背景色或者背景图片
   final ui.Image Function(int pageIndex)? getBackground;
 
+  /// 调试模式 输出布局信息
+  bool debug;
+
   /// 是否显示动画
   bool showAnimation;
 
@@ -222,18 +225,15 @@ class TextComposition {
     }
   }
 
-  /// 调试模式 输出布局信息
-  bool debug;
-
   Widget getPageWidget([int pageIndex = 0]) {
-    // if (pageIndex != null && !changePage(pageIndex)) return Container();
+    final page = pages[pageIndex];
+
     return Container(
       width: boxSize.width,
-      height:
-          boxSize.height.isInfinite ? pages[pageIndex].height : boxSize.height,
+      height: boxSize.height.isInfinite ? page.height : boxSize.height,
       child: CustomPaint(
-          painter: PagePainter(
-              pageIndex, pages[pageIndex], style, titleStyle, debug)),
+        painter: PagePainter(pageIndex, page, style, titleStyle, debug),
+      ),
     );
   }
 
@@ -241,8 +241,10 @@ class TextComposition {
     final recorder = ui.PictureRecorder();
     final canvas = new Canvas(recorder,
         Rect.fromPoints(Offset.zero, Offset(boxSize.width, boxSize.height)));
+
     PagePainter(pageIndex, pages[pageIndex], style, titleStyle, debug)
         .paint(canvas, boxSize);
+
     final picture = recorder.endRecording();
     return await picture.toImage(boxSize.width.floor(), boxSize.height.floor());
   }

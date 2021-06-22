@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:readme/common/constant.dart';
+import 'package:readme/widget/text_composition.dart';
+
+import 'first_chapter.dart';
 
 /// 滑动翻页阅读视图
 /// 用于左右滑动翻页方式进行阅读
@@ -10,12 +13,13 @@ class FlipReadView extends StatefulWidget {
   final VoidCallback? onLoadLase;
   final ReadController? controller;
 
-  FlipReadView(
-      {this.height = 0,
-      this.content = "",
-      this.controller,
-      this.onLoadNext,
-      this.onLoadLase});
+  FlipReadView({
+    this.height = 0,
+    this.content = "",
+    this.controller,
+    this.onLoadNext,
+    this.onLoadLase,
+  });
 
   @override
   _FlipReadViewState createState() => _FlipReadViewState();
@@ -23,15 +27,37 @@ class FlipReadView extends StatefulWidget {
 
 class _FlipReadViewState extends State<FlipReadView> {
   final PageController _controller = PageController(initialPage: 0);
+  late TextComposition textComposition;
 
-  int _pageCount = 5;
-  int _lastIndex = 0;
+  var size = TextEditingController(text: '18'),
+      height = TextEditingController(text: '1.5'),
+      paragraph = TextEditingController(text: '10'),
+      _lastIndex = 0;
+
+  get _pageCount => textComposition.pageCount;
+
+  @override
+  void initState() {
+    super.initState();
+
+    textComposition = TextComposition(
+      title: "Tset",
+      text: first_chapter,
+      style: TextStyle(
+        color: Colors.black87,
+        fontSize: double.tryParse(size.text),
+        height: double.tryParse(height.text),
+      ),
+      padding: EdgeInsets.all(8),
+      shouldJustifyHeight: true,
+      debug: true,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final contentHeight =
         widget.height - ReadPageConstant.INFO_CONTAINER_HEIGHT;
-    double contentFontSize = 18;
 
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
@@ -62,11 +88,7 @@ class _FlipReadViewState extends State<FlipReadView> {
             children: [
               Container(
                 height: contentHeight,
-                padding: EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 8),
-                child: Text(
-                  widget.content,
-                  style: TextStyle(fontSize: contentFontSize),
-                ),
+                child: textComposition.getPageWidget(index),
               ),
               Container(
                 height: ReadPageConstant.INFO_CONTAINER_HEIGHT,
