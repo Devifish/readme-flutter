@@ -1,5 +1,6 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
+import 'package:readme/view/read/scroll_read_view.dart';
 
 import 'flip_read_view.dart';
 
@@ -72,15 +73,18 @@ class _ReadBookState extends State<ReadBook> {
                   print("下一章");
                 }
               },
-              child: FlipReadView(
+              // child: FlipReadView(
+              //   height: contentHeight,
+              //   content: _content,
+              //   onLoadNext: () async {
+              //     print("开始加载下一章");
+              //   },
+              //   onLoadLase: () async {
+              //     print("开始加载上一章");
+              //   },
+              // ),
+              child: ScrollReadView(
                 height: contentHeight,
-                content: _content,
-                onLoadNext: () async {
-                  print("开始加载下一章");
-                },
-                onLoadLase: () async {
-                  print("开始加载上一章");
-                },
               ),
             ),
           ),

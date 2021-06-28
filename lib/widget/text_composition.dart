@@ -196,6 +196,7 @@ class TextComposition {
       while (true) {
         tp.text = TextSpan(text: p, style: style);
         tp.layout(maxWidth: columnWidth);
+
         final textCount = tp.getPositionForOffset(offset).offset;
         double? spacing;
         final text = p.substring(0, textCount);
@@ -204,8 +205,10 @@ class TextComposition {
           tp.layout();
           spacing = (_width - tp.width) / textCount;
         }
+
         lines.add(TextLine(text, dx, dy, spacing));
         dy += tp.height;
+
         if (p.length == textCount) {
           newParagraph();
           break;

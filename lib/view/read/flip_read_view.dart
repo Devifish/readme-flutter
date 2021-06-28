@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:html/parser.dart';
 import 'package:readme/common/constant.dart';
+import 'package:readme/view/read/footer_status_view.dart';
 import 'package:readme/widget/text_composition.dart';
 
 import 'first_chapter.dart';
@@ -27,6 +29,7 @@ class FlipReadView extends StatefulWidget {
 
 class _FlipReadViewState extends State<FlipReadView> {
   final PageController _controller = PageController(initialPage: 0);
+  final initialPage = 0x7FFFFFFF;
   late TextComposition textComposition;
 
   var size = TextEditingController(text: '18'),
@@ -90,13 +93,10 @@ class _FlipReadViewState extends State<FlipReadView> {
                 height: contentHeight,
                 child: textComposition.getPageWidget(index),
               ),
-              Container(
-                height: ReadPageConstant.INFO_CONTAINER_HEIGHT,
-                child: Text(
-                  "${index + 1}/$_pageCount",
-                  style: TextStyle(
-                      fontSize: ReadPageConstant.INFO_CONTAINER_FONT_SIZE),
-                ),
+              FooterStatusView(
+                chapterName: "",
+                currentPage: index + 1,
+                totalPage: _pageCount,
               ),
             ],
           );
